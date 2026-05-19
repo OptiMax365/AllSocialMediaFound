@@ -921,7 +921,7 @@ body {
       
       <div class="about-section">
         <h4>🎯 Why We Created This</h4>
-        <p>We built this beautiful sliding card interface to give everyone <strong>easy, one-click access</strong> to all major social media platforms in one place. No more searching, no more confusion — just tap and go!</p>
+        <p>We built this beautiful sliding card interface to give everyone <strong>easy, one-click access</strong> to all major social media platforms in one place. Home To Social Media</p>
         <div class="about-highlight">
           🌍 Made with love for the global community. Free forever.
         </div>
@@ -954,9 +954,9 @@ body {
 
       <div class="about-section">
         <h4>💬 Questions or Updates?</h4>
-        <p>We welcome your feedback! If you notice anything that needs attention, have suggestions for new platforms, or just want to say hello — we'd love to hear from you.</p>
+        <p>We welcome your feedback, If you want include your social media, message us, we welcome you. If you notice anything that needs attention, have suggestions for new platforms, or just want to say hello, we'd love to hear from you.</p>
         <div class="about-highlight">
-          📧 Reach out anytime: <strong>olusolaayodeji5112@gmail.com</strong>
+          📧 Us Am Here To Help, Feel Good To Reach Us anytime: <strong>olusolaayodeji5112@gmail.com</strong>
         </div>
       </div>
 
@@ -964,9 +964,9 @@ body {
     
     <div class="about-footer">
       <p style="color: var(--accent); font-weight: 600; margin-bottom: 10px;">
-        🚀 We're excited to share this with the world!
+        🚀 We're excited to share this with the world
       </p>
-      <p>Thank you for using our verified social media directory. Browse with confidence.</p>
+      <p>Thank you for using our social media directory. Browse with confidence.</p>
       <button class="modal-btn direct" id="aboutContactBtn" style="margin-top: 10px;">
         <span>✉️</span> Contact Us
       </button>
@@ -1500,11 +1500,12 @@ function positionDropdown(dropdown) {
 
 // === CARD CLICK: Show Actions ===
 document.addEventListener('click', (e) => {
+  // Don't close if clicking inside card-actions or theme-dropdown
   if (e.target.closest('.card-actions') || e.target.closest('.theme-dropdown')) {
     return;
   }
   
-  document.querySelectorAll('.card-actions').forEach(a => a.classList.remove('visible'));
+  // Close all dropdowns but keep action buttons visible if they were already showing
   document.querySelectorAll('.theme-dropdown').forEach(d => {
     d.classList.remove('show');
     d.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
@@ -1520,12 +1521,14 @@ document.addEventListener('click', (e) => {
 
 // === THEME PICKER: OPEN/CLOSE ===
 document.addEventListener('click', (e) => {
+  // Toggle dropdown on theme button click
   if (e.target.closest('.theme-picker-btn')) {
     e.stopPropagation();
     const wrapper = e.target.closest('.theme-picker-wrapper');
     const dropdown = wrapper.querySelector('.theme-dropdown');
     const isVisible = dropdown.classList.contains('show');
     
+    // Close all other dropdowns first
     document.querySelectorAll('.theme-dropdown').forEach(d => {
       if (d !== dropdown) {
         d.classList.remove('show');
@@ -1533,13 +1536,16 @@ document.addEventListener('click', (e) => {
       }
     });
     
+    // Toggle current dropdown
     if (isVisible) {
       dropdown.classList.remove('show');
       dropdown.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
       selectedTheme = null;
     } else {
       dropdown.classList.add('show');
+      // Position dropdown smartly
       setTimeout(() => positionDropdown(dropdown), 10);
+      // Pre-select current theme visually
       dropdown.querySelector(`.theme-option[data-theme="${currentTheme}"]`)?.classList.add('selected');
       selectedTheme = currentTheme;
     }
@@ -1547,6 +1553,7 @@ document.addEventListener('click', (e) => {
     return;
   }
   
+  // Theme option selection (preview only, doesn't apply yet)
   const option = e.target.closest('.theme-option');
   if (option && !e.target.closest('.theme-actions')) {
     e.stopPropagation();
@@ -1557,14 +1564,17 @@ document.addEventListener('click', (e) => {
     return;
   }
   
+  // Apply button click - CLOSE DROPDOWN AFTER APPLYING
   if (e.target.closest('.theme-apply-btn')) {
     e.stopPropagation();
     if (selectedTheme && themes[selectedTheme]) {
       applyTheme(selectedTheme);
+      // Close dropdown after apply
       const dropdown = e.target.closest('.theme-dropdown');
       dropdown.classList.remove('show');
       dropdown.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
       selectedTheme = null;
+      // Pause animation, wait 3 seconds, then resume
       track.style.animationPlayState = 'paused';
       clearTimeout(themeResumeTimeout);
       themeResumeTimeout = setTimeout(() => {
@@ -1574,6 +1584,7 @@ document.addEventListener('click', (e) => {
     return;
   }
   
+  // Cancel button click
   if (e.target.closest('.theme-cancel-btn')) {
     e.stopPropagation();
     const dropdown = e.target.closest('.theme-dropdown');
@@ -1584,6 +1595,7 @@ document.addEventListener('click', (e) => {
     return;
   }
   
+  // Close dropdown if clicking outside theme-picker-wrapper
   if (!e.target.closest('.theme-picker-wrapper')) {
     document.querySelectorAll('.theme-dropdown').forEach(d => {
       d.classList.remove('show');
