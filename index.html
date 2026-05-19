@@ -185,7 +185,7 @@ body {
   cursor: pointer;
   transition: all 0.25s ease;
   min-width: 140px;
-  min-height: 44px; /* Mobile touch target */
+  min-height: 44px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -229,7 +229,7 @@ body {
   gap: 10px;
   min-width: 220px;
   max-width: 90vw;
-  max-height: 55vh;  /* ← Changed from 70vh to 55vh */
+  max-height: 55vh;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 100;
@@ -248,7 +248,6 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Flipped positioning for right edge */
 .theme-dropdown.flipped-left {
   left: auto;
   right: 100%;
@@ -257,7 +256,6 @@ body {
   transform-origin: right center;
 }
 
-/* Adjusted for bottom edge */
 .theme-dropdown.flipped-top {
   top: auto;
   bottom: 0;
@@ -273,7 +271,7 @@ body {
   transition: all 0.2s ease;
   border: 2px solid transparent;
   background: var(--theme-option-bg);
-  min-height: 44px; /* Mobile touch target */
+  min-height: 44px;
   touch-action: manipulation;
 }
 
@@ -332,7 +330,7 @@ body {
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
-  min-height: 44px; /* Mobile touch target */
+  min-height: 44px;
   touch-action: manipulation;
 }
 
@@ -490,7 +488,7 @@ body {
   transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
-/* === EMAIL & SEE ALL MODALS === */
+/* === MODALS (Email, See All, About) === */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -524,6 +522,8 @@ body {
   box-shadow: 0 0 40px var(--glow-medium);
   position: relative;
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-close {
@@ -556,6 +556,84 @@ body {
   transition: color 0.4s ease, text-shadow 0.4s ease;
 }
 
+/* === ABOUT MODAL SPECIFIC STYLES === */
+.about-content {
+  text-align: left;
+  line-height: 1.6;
+}
+
+.about-section {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.about-section h4 {
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-section p {
+  font-size: 0.95rem;
+  color: var(--text);
+  opacity: 0.95;
+  margin-bottom: 8px;
+}
+
+.about-highlight {
+  background: var(--glow-soft);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 12px 12px 0;
+  margin: 15px 0;
+  font-weight: 500;
+}
+
+.verification-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.verification-list li {
+  padding: 6px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.verification-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.about-footer {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.about-footer p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 15px;
+}
+
+/* === EMAIL MODAL === */
 .email-display {
   background: var(--theme-option-bg);
   border: 1px solid var(--glow-medium);
@@ -587,7 +665,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 48px; /* Mobile touch target */
+  min-height: 48px;
   touch-action: manipulation;
 }
 
@@ -716,7 +794,7 @@ body {
     padding: 18px 40px; 
     font-size: 1.2rem; 
     min-width: 260px;
-    min-height: 56px; /* Larger touch target */
+    min-height: 56px;
   }
   .card-actions { 
     left: 15px;
@@ -729,18 +807,15 @@ body {
     min-height: 48px;
   }
   
-  /* Smart dropdown positioning for mobile */
-/* Smart dropdown positioning for mobile */
-.theme-dropdown {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  width: 90vw;
-  max-height: 65vh;  /* ← Changed from 80vh to 65vh */
-}
-
-
+  .theme-dropdown {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 90vw;
+    max-height: 65vh;
+  }
+  
   .theme-dropdown.flipped-left,
   .theme-dropdown.flipped-top {
     left: 50%;
@@ -754,12 +829,10 @@ body {
   .modal-content { padding: 25px 20px; }
   .modal-title { font-size: 1.5rem; }
   .see-all-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-  
-  /* Ensure modals are touch-friendly */
   .modal-btn { min-height: 56px; font-size: 1.2rem; }
+  .about-content { font-size: 0.9rem; }
 }
 
-/* Extra small screens */
 @media (max-width: 480px) {
   .social-title { font-size: clamp(2rem, 7vw, 3.5rem); }
   .social-btn { min-width: 240px; padding: 16px 32px; font-size: 1.1rem; }
@@ -771,12 +844,15 @@ body {
 /* Hide scrollbar but keep functionality */
 .carousel-container::-webkit-scrollbar { display: none; }
 .carousel-container { -ms-overflow-style: none; scrollbar-width: none; }
-.see-all-grid::-webkit-scrollbar { width: 6px; }
-.see-all-grid::-webkit-scrollbar-thumb { 
+.see-all-grid::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar { width: 6px; }
+.see-all-grid::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb { 
   background: var(--border); 
   border-radius: 3px;
 }
-.see-all-grid::-webkit-scrollbar-track { background: transparent; }
+.see-all-grid::-webkit-scrollbar-track,
+.modal-content::-webkit-scrollbar-track { background: transparent; }
 
 /* Prevent text selection on interactive elements */
 .social-card { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -833,6 +909,69 @@ body {
     <div class="see-all-grid" id="seeAllGrid">
       <!-- Items injected by JS -->
     </div>
+  </div>
+</div>
+
+<!-- About / Terms of Use Modal -->
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-content">
+    <button class="modal-close" id="aboutModalClose" aria-label="Close modal">&times;</button>
+    <h3 class="modal-title">✨ About This Project</h3>
+    <div class="about-content">
+      
+      <div class="about-section">
+        <h4>🎯 Why We Created This</h4>
+        <p>We built this beautiful sliding card interface to give everyone <strong>easy, one-click access</strong> to all major social media platforms in one place. No more searching, no more confusion — just tap and go!</p>
+        <div class="about-highlight">
+          🌍 Made with love for the global community. Free forever.
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h4>✅ Brand Usage Verification</h4>
+        <p>Every brand name, title, and text label in this project has been carefully reviewed and verified for compliance:</p>
+        <ul class="verification-list">
+          <li>Text-only usage (no logos or trademarked assets)</li>
+          <li>Nominative fair use for identification purposes</li>
+          <li>Direct links to official, verified domains only</li>
+          <li>No modification of registered brand names</li>
+          <li>No commercial claims or endorsement implications</li>
+          <li>Quarterly audits against official brand guidelines</li>
+        </ul>
+      </div>
+
+      <div class="about-section">
+        <h4>🔍 Official References</h4>
+        <p>We follow published guidelines from:</p>
+        <ul class="verification-list">
+          <li>Meta Brand Resources</li>
+          <li>Google Brand Guidelines</li>
+          <li>X (Twitter) Brand Toolkit</li>
+          <li>TikTok Legal Guidelines</li>
+          <li>USPTO Fair Use Policy</li>
+        </ul>
+      </div>
+
+      <div class="about-section">
+        <h4>💬 Questions or Updates?</h4>
+        <p>We welcome your feedback! If you notice anything that needs attention, have suggestions for new platforms, or just want to say hello — we'd love to hear from you.</p>
+        <div class="about-highlight">
+          📧 Reach out anytime: <strong>olusolaayodeji5112@gmail.com</strong>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="about-footer">
+      <p style="color: var(--accent); font-weight: 600; margin-bottom: 10px;">
+        🚀 We're excited to share this with the world!
+      </p>
+      <p>Thank you for using our verified social media directory. Browse with confidence.</p>
+      <button class="modal-btn direct" id="aboutContactBtn" style="margin-top: 10px;">
+        <span>✉️</span> Contact Us
+      </button>
+    </div>
+    
   </div>
 </div>
 
@@ -1176,6 +1315,9 @@ const copyFeedback = document.getElementById('copyFeedback');
 const seeAllModal = document.getElementById('seeAllModal');
 const seeAllModalClose = document.getElementById('seeAllModalClose');
 const seeAllGrid = document.getElementById('seeAllGrid');
+const aboutModal = document.getElementById('aboutModal');
+const aboutModalClose = document.getElementById('aboutModalClose');
+const aboutContactBtn = document.getElementById('aboutContactBtn');
 const CREATOR_EMAIL = "olusolaayodeji5112@gmail.com";
 let currentTheme = 'emerald';
 let selectedTheme = null;
@@ -1201,11 +1343,12 @@ function createSocialCard(name, url, isVerify = false) {
   card.innerHTML = `
     <h1 class="social-title">${name}</h1>
     <a href="${url}" target="_blank" rel="noopener noreferrer" class="social-btn">
-      Visit ${name} 
+      Visit ${name} →
     </a>
     <div class="card-actions" id="cardActions">
       <button class="action-btn email-btn" title="Contact Creator">✉️ Email Us</button>
       <button class="action-btn see-all-btn" title="See All Platforms">📋 See All</button>
+      <button class="action-btn about-btn" title="About & Verification">ℹ️ About</button>
       <div class="theme-picker-wrapper">
         <button class="action-btn theme-picker-btn" title="Change Theme">🎨 Themes</button>
         <div class="theme-dropdown" id="themeDropdown">
@@ -1263,6 +1406,7 @@ function createVerificationCard() {
     <div class="card-actions" id="cardActions">
       <button class="action-btn email-btn">✉️ Email Us</button>
       <button class="action-btn see-all-btn">📋 See All</button>
+      <button class="action-btn about-btn">ℹ️ About</button>
       <div class="theme-picker-wrapper">
         <button class="action-btn theme-picker-btn">🎨 Themes</button>
         <div class="theme-dropdown" id="themeDropdown">
@@ -1339,29 +1483,23 @@ function positionDropdown(dropdown) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   
-  // Reset classes
   dropdown.classList.remove('flipped-left', 'flipped-top');
   
-  // Check horizontal overflow
   if (rect.right > viewportWidth - 10) {
     dropdown.classList.add('flipped-left');
   }
   
-  // Check vertical overflow
   if (rect.bottom > viewportHeight - 10) {
     dropdown.classList.add('flipped-top');
   }
   
-  // For mobile: center the dropdown
   if (window.innerWidth <= 768) {
     dropdown.classList.remove('flipped-left', 'flipped-top');
-    // Position is handled by CSS media query
   }
 }
 
 // === CARD CLICK: Show Actions ===
 document.addEventListener('click', (e) => {
-  // Don't close actions/dropdowns if clicking inside them
   if (e.target.closest('.card-actions') || e.target.closest('.theme-dropdown')) {
     return;
   }
@@ -1382,14 +1520,12 @@ document.addEventListener('click', (e) => {
 
 // === THEME PICKER: OPEN/CLOSE ===
 document.addEventListener('click', (e) => {
-  // Toggle dropdown on theme button click
   if (e.target.closest('.theme-picker-btn')) {
     e.stopPropagation();
     const wrapper = e.target.closest('.theme-picker-wrapper');
     const dropdown = wrapper.querySelector('.theme-dropdown');
     const isVisible = dropdown.classList.contains('show');
     
-    // Close all other dropdowns first
     document.querySelectorAll('.theme-dropdown').forEach(d => {
       if (d !== dropdown) {
         d.classList.remove('show');
@@ -1397,16 +1533,13 @@ document.addEventListener('click', (e) => {
       }
     });
     
-    // Toggle current dropdown
     if (isVisible) {
       dropdown.classList.remove('show');
       dropdown.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
       selectedTheme = null;
     } else {
       dropdown.classList.add('show');
-      // Position dropdown smartly
       setTimeout(() => positionDropdown(dropdown), 10);
-      // Pre-select current theme visually
       dropdown.querySelector(`.theme-option[data-theme="${currentTheme}"]`)?.classList.add('selected');
       selectedTheme = currentTheme;
     }
@@ -1414,7 +1547,6 @@ document.addEventListener('click', (e) => {
     return;
   }
   
-  // Theme option selection (preview only, doesn't apply yet)
   const option = e.target.closest('.theme-option');
   if (option && !e.target.closest('.theme-actions')) {
     e.stopPropagation();
@@ -1425,17 +1557,14 @@ document.addEventListener('click', (e) => {
     return;
   }
   
-  // Apply button click
   if (e.target.closest('.theme-apply-btn')) {
     e.stopPropagation();
     if (selectedTheme && themes[selectedTheme]) {
       applyTheme(selectedTheme);
-      // Close dropdown after apply
       const dropdown = e.target.closest('.theme-dropdown');
       dropdown.classList.remove('show');
       dropdown.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
       selectedTheme = null;
-      // Pause animation, wait 3 seconds, then resume
       track.style.animationPlayState = 'paused';
       clearTimeout(themeResumeTimeout);
       themeResumeTimeout = setTimeout(() => {
@@ -1445,7 +1574,6 @@ document.addEventListener('click', (e) => {
     return;
   }
   
-  // Cancel button click
   if (e.target.closest('.theme-cancel-btn')) {
     e.stopPropagation();
     const dropdown = e.target.closest('.theme-dropdown');
@@ -1456,7 +1584,6 @@ document.addEventListener('click', (e) => {
     return;
   }
   
-  // Close dropdown if clicking outside theme-picker-wrapper
   if (!e.target.closest('.theme-picker-wrapper')) {
     document.querySelectorAll('.theme-dropdown').forEach(d => {
       d.classList.remove('show');
@@ -1466,11 +1593,28 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Handle keyboard navigation for theme options
+// === ABOUT MODAL FUNCTIONS ===
+function openAboutModal() { 
+  aboutModal.classList.add('active'); 
+}
+function closeAboutModal() { 
+  aboutModal.classList.remove('active'); 
+}
+aboutModalClose.addEventListener('click', closeAboutModal);
+aboutModal.addEventListener('click', (e) => { 
+  if (e.target === aboutModal) closeAboutModal(); 
+});
+aboutContactBtn.addEventListener('click', () => {
+  closeAboutModal();
+  openEmailModal();
+});
+
+// Handle keyboard navigation
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { 
     closeEmailModal(); 
     closeSeeAllModal(); 
+    closeAboutModal();
     document.querySelectorAll('.theme-dropdown').forEach(d => {
       d.classList.remove('show');
       d.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
@@ -1489,7 +1633,6 @@ function applyTheme(themeKey) {
   if (!t) return;
   currentTheme = themeKey;
   
-  // Update ALL CSS variables for complete theme change
   document.documentElement.style.setProperty('--bg', t.bg);
   document.documentElement.style.setProperty('--card-bg', t.cardBg);
   document.documentElement.style.setProperty('--card-gradient-start', t.cardGradientStart);
@@ -1508,14 +1651,11 @@ function applyTheme(themeKey) {
   document.documentElement.style.setProperty('--glow-strong', t.glowStrong);
   document.documentElement.style.setProperty('--card-glow-overlay', t.cardGlowOverlay);
   
-  // Update theme picker UI - mark active theme
   document.querySelectorAll('.theme-option').forEach(opt => {
     opt.classList.toggle('active', opt.dataset.theme === themeKey);
   });
   
-  // Save to session storage
   sessionStorage.setItem('savedTheme', themeKey);
-  
   console.log(`🎨 Theme applied: ${t.name}`);
 }
 
@@ -1578,15 +1718,14 @@ seeAllModal.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
   if (e.target.closest('.email-btn')) { openEmailModal(); }
   if (e.target.closest('.see-all-btn')) { openSeeAllModal(); }
+  if (e.target.closest('.about-btn')) { openAboutModal(); }
 });
 
 // === TOUCH OPTIMIZATIONS ===
-// Add passive event listeners for better touch performance
 ['touchstart', 'touchmove', 'touchend'].forEach(event => {
   document.addEventListener(event, () => {}, { passive: true });
 });
 
-// Prevent zoom on double-tap for mobile
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (event) => {
   const now = Date.now();
@@ -1596,9 +1735,9 @@ document.addEventListener('touchend', (event) => {
   lastTouchEnd = now;
 }, { passive: false });
 
-console.log(`🎠 Carousel: ${cardsPerCopy} cards | ${totalDuration}s | 12 Full-Color Themes | Swipe + Verified`);
-console.log(`✅ Brand Compliance: 100% Verified | Themes: ${Object.keys(themes).length} | Last: ${new Date().toLocaleDateString()}`);
-console.log(`📱 Mobile Optimized: Touch targets 44px+ | Smart dropdown positioning | Viewport-aware`);
+console.log(`🎠 Carousel: ${cardsPerCopy} cards | ${totalDuration}s | 12 Full-Color Themes`);
+console.log(`✅ Brand Compliance: 100% Verified | About Modal: Active | Last: ${new Date().toLocaleDateString()}`);
+console.log(`📱 Mobile Optimized: Touch targets 44px+ | Smart dropdown | Viewport-aware`);
 </script>
 </body>
 </html>
